@@ -4,15 +4,6 @@ var JSConstants = {
         Log: "Log",
         AudioPlay: "AudioPlay",
         GoBack: "GoBack",
-        CountDown: "CountDown",
-        PhotoCrop: "PhotoCrop",
-        GlobalCache: "GlobalCache",
-        ExitApp: "ExitApp",
-
-        //pplay
-        Config: "Config",
-        OCR: "OCR",
-        TTS: "TTS",
-        Speech: "Speech"
+        GlobalCache: "GlobalCache"
     }
 };

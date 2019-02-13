@@ -13,132 +13,145 @@
 	<script src="js/mint.min.js"></script>
 
 	<style type="text/css">
-		.field-textarea-container {
-			border-bottom: 1px solid #d9d9d9;
-			margin: 0 5px 5px 5px;
-			border-left: 1px solid #d9d9d9;
-			border-right: 1px solid #d9d9d9;
-		}
-
-		.img-container {
-			margin: 0 5px 5px 5px;
-		}
-
-		.field-btton-container {
-			margin: 0 5px 5px 5px;
-			text-align: center;
-		}
-
-		.mint-cell {
-			min-height: 50px;
-		}
-
-		#divLang {
-			padding: 0 5px 0 5px;
-			border-top: 1px solid #d9d9d9;
-		}
-
-		#divLang .mint-cell {
-			min-height: 40px;
-			float: left;
-			background-size: 120% 0px;
-		}
-
-		#divLang .mint-radiolist-title {
-			display: none;
-		}
-
-		#divLang .mint-cell-wrapper {
-			padding: 0;
-			background-size: 120% 0px;
-		}
-
-		.mint-cell:last-child {
-			background-position: inherit;
-		}
-
-		.mint-button-text {
-			font-size: 16px;
-		}
-
-		#divExitApp .mint-cell {
-			background-color: #FFFAFA;
-		}
-
-		#divExitApp .mint-cell-title {
-			text-align: center;
-			color: #36648B;
-			font-size: 18px;
-			font-weight: 600;
-		}
-
-		#divNotification .mint-cell-title {
-			text-align: center;
-			color: #000000;
-			font-size: 16px;
-		}
-
-		/* tools */
-		.tools {
-			padding: 5px 0;
-			width: 100%;
-		}
-		.tools table {
-			border: 1px solid #eee;
+		.sm{
 			border-collapse: collapse;
 		}
-		.tools td {
-			text-align: center;
-			border: 1px solid #eee;
-			padding: 20px 0;
+
+		.sm td{
+			padding: 12px;
 		}
-		.tools img {
-			width: 70px;
-			height: 70px;
+
+		.sm img{
+			width: 60px;
+			height: 60px;
 		}
-		.tools span {
-			display: block;
-			color: 14px;
-			margin: 3px;
+
+		.ym{
+			border-collapse: collapse;
+		}
+
+		.ym td{
+			padding: 12px;
+		}
+
+		.ym img{
+			width: 60px;
+			height: 60px;
 		}
 	</style>
 </HEAD>
-<BODY>
+<BODY bgcolor="#B4CDCD">
 	<div id="app" class="vue-mint-container">
 		<mt-header fixed title="学汉字"></mt-header>
 
 		<mt-tab-container v-model="selectedTab">
 			<mt-tab-container-item id="tab1">
-				<div v-for="item in gradeList" @click="showUnit(item.id)">
-					<mt-cell :title="item.name" is-link></mt-cell>
-				</div>
-
-				<div @click="changePage('yy_globalSearch.html')" style="border-bottom:1px solid #d9d9d9">
-					<mt-cell title="全局搜索" is-link></mt-cell>
-				</div>
+				<table border="0" width="100%">
+					<tr>
+						<td align="center">
+							<table class="sm">
+								<tr>
+									<td><img src="pinyin/b.jpg" @click="_playVoice('b')"></td>
+									<td><img src="pinyin/p.jpg" @click="_playVoice('p')"></td>
+									<td><img src="pinyin/m.jpg" @click="_playVoice('m')"></td>
+									<td><img src="pinyin/f.jpg" @click="_playVoice('f')"></td>
+								</tr>
+								<tr>
+									<td><img src="pinyin/d.jpg" @click="_playVoice('d')"></td>
+									<td><img src="pinyin/t.jpg" @click="_playVoice('t')"></td>
+									<td><img src="pinyin/n.jpg" @click="_playVoice('n')"></td>
+									<td><img src="pinyin/l.jpg" @click="_playVoice('l')"></td>
+								</tr>
+								<tr>
+									<td><img src="pinyin/g.jpg" @click="_playVoice('g')"></td>
+									<td><img src="pinyin/k.jpg" @click="_playVoice('k')"></td>
+									<td><img src="pinyin/h.jpg" @click="_playVoice('h')"></td>
+									<td><img src="pinyin/j.jpg" @click="_playVoice('j')"></td>
+								</tr>
+								<tr>
+									<td><img src="pinyin/q.jpg" @click="_playVoice('q')"></td>
+									<td><img src="pinyin/x.jpg" @click="_playVoice('x')"></td>
+									<td><img src="pinyin/zh.jpg" @click="_playVoice('zh')"></td>
+									<td><img src="pinyin/ch.jpg" @click="_playVoice('ch')"></td>
+								</tr>
+								<tr>
+									<td><img src="pinyin/sh.jpg" @click="_playVoice('sh')"></td>
+									<td><img src="pinyin/r.jpg" @click="_playVoice('r')"></td>
+									<td><img src="pinyin/z.jpg" @click="_playVoice('z')"></td>
+									<td><img src="pinyin/c.jpg" @click="_playVoice('c')"></td>
+								</tr>
+								<tr>
+									<td><img src="pinyin/s.jpg" @click="_playVoice('s')"></td>
+									<td><img src="pinyin/y.jpg"></td>
+									<td><img src="pinyin/w.jpg"></td>
+									<td>&nbsp;</td>
+								</tr>
+							</table>
+						</td>
+					</tr>
+				</table>
 			</mt-tab-container-item>
 
 			<mt-tab-container-item id="tab2" style="display:none;">
-				<div class="field-textarea-container">
-					<mt-field label="" type="textarea" rows="8" v-model.trim="transFrom"></mt-field>
-				</div>
+				<table border="0" width="100%">
+					<tr>
+						<td align="center">
+							<table class="ym">
+								<tr>
+									<td><img src="pinyin/a.jpg" @click="_playVoice('a')"></td>
+									<td><img src="pinyin/o.jpg" @click="_playVoice('o')"></td>
+									<td><img src="pinyin/e.jpg" @click="_playVoice('e')"></td>
+									<td><img src="pinyin/i.jpg" @click="_playVoice('i')"></td>
+								</tr>
+								<tr>
+									<td><img src="pinyin/u.jpg" @click="_playVoice('u')"></td>
+									<td><img src="pinyin/ü.jpg" @click="_playVoice('ü')"></td>
+									<td><img src="pinyin/ai.jpg" @click="_playVoice('ai')"></td>
+									<td><img src="pinyin/ei.jpg" @click="_playVoice('ei')"></td>
+								</tr>
+								<tr>
+									<td><img src="pinyin/ui.jpg" @click="_playVoice('ui')"></td>
+									<td><img src="pinyin/ao.jpg"></td>
+									<td><img src="pinyin/ou.jpg"></td>
+									<td><img src="pinyin/iu.jpg" @click="_playVoice('iu')"></td>
+								</tr>
+								<tr>
+									<td><img src="pinyin/ie.jpg" @click="_playVoice('ie')"></td>
+									<td><img src="pinyin/üe.jpg"></td>
+									<td><img src="pinyin/er.jpg"></td>
+									<td><img src="pinyin/an.jpg" @click="_playVoice('an')"></td>
+								</tr>
+								<tr>
+									<td><img src="pinyin/en.jpg" @click="_playVoice('en')"></td>
+									<td><img src="pinyin/in.jpg" @click="_playVoice('in')"></td>
+									<td><img src="pinyin/un.jpg" @click="_playVoice('un')"></td>
+									<td><img src="pinyin/ün.jpg" @click="_playVoice('ün')"></td>
+								</tr>
+								<tr>
+									<td><img src="pinyin/ang.jpg" @click="_playVoice('ang')"></td>
+									<td><img src="pinyin/eng.jpg" @click="_playVoice('eng')"></td>
+									<td><img src="pinyin/ing.jpg" @click="_playVoice('ing')"></td>
+									<td><img src="pinyin/ong.jpg" @click="_playVoice('ong')"></td>
+								</tr>
+							</table>
+						</td>
+					</tr>
+				</table>
+			</mt-tab-container-item>
 
-				<div class="field-btton-container">
-					<mt-button type="primary" size="small" @click="translate('zh')">译成中文</mt-button>&nbsp;&nbsp;
-					<mt-button type="primary" size="small" @click="translate('en')">译成英文</mt-button>
-				</div>
+			<mt-tab-container-item id="tab3" style="display:none;">
 
-				<div class="field-textarea-container">
-					<mt-field label="" type="textarea" rows="9" v-model.trim="transTo"></mt-field>
-				</div>
 			</mt-tab-container-item>
 		</mt-tab-container>
 
 		<mt-tabbar fixed v-model="selectedTab">
 			<mt-tab-item id="tab1">
-				<img slot="icon" src="images/pinyin.png">拼音
+				<img slot="icon" src="images/pinyin.png">声母表
 			</mt-tab-item>
 			<mt-tab-item id="tab2">
+				<img slot="icon" src="images/pinyin.png">韵母表
+			</mt-tab-item>
+			<mt-tab-item id="tab3">
 				<img slot="icon" src="images/hanzi.png">汉字
 			</mt-tab-item>
 		</mt-tabbar>
@@ -148,18 +161,7 @@
 		var vm = new Vue({
 			el: '#app',
 			data: {
-				gradeList: [
-					//{id:"1", name:"111"},
-					//{id:"2", name:"222"}
-				],
-
-				selectedTab: "tab1",
-
-				transFrom: "",
-				transTo: "",
-
-				lang: "普通话",
-				speechResult: ""
+				selectedTab: "tab1"
 			},
 			methods: {
 				changePage: function(pageURL, actionName, extend){
@@ -175,38 +177,9 @@
 					var obj = {"parameters": "gradeId="+gradeId, "url": "yy_unit_list.html"};
 					jsBridge.dispatchAction(actionNames.PageTransfer, JSON.stringify(obj));
 				},
-				translate: function(transType){ //翻译
-					var obj = {"content":this.transFrom, "transType": transType};
-					var result = jsBridge.dispatchAction("Translate", JSON.stringify(obj));
-					this.transTo = result;
-				},
-				speechStart: function(){ //开始识别
-					this.speechResult = "";
-					var obj = {"lang": this.lang};
-					jsBridge.dispatchAction(actionNames.Speech, JSON.stringify(obj), "start");
-				},
-				speechStop: function(){ //结束识别
-					jsBridge.dispatchAction(actionNames.Speech, "", "stop");
-				},
-				selectTool: function(toolName){
-					if(toolName == "translate"){
-						this.selectedTab = "tab2";
-					}else if(toolName == "recognition"){
-						this.selectedTab = "tab22";
-					}else{
-						var obj = {"url":"tool_" + toolName + ".html"};
-						jsBridge.dispatchAction(actionNames.PageTransfer, JSON.stringify(obj), "");
-					}
-				},
-				notify: function(){
-					var data = {"id":1};
-					var obj = {"title":"天气预报", "content":"广州，多云，7～11度，微风", "data":JSON.stringify(data)};
-					jsBridge.dispatchAction("Notification", JSON.stringify(obj));
-				},
-				exitApp: function(){
-					if(confirm("确定要退出应用？")){
-						jsBridge.dispatchAction(actionNames.ExitApp, "", "");
-					}
+				_playVoice: function(name){
+					var obj = {"audioFile": "html/pinyin/" + name + ".mp3"};
+					jsBridge.dispatchAction(actionNames.AudioPlay, JSON.stringify(obj));
 				}
 			},
 			watch: {
@@ -227,13 +200,6 @@
 			if(currentTab != ""){
 				vm.selectedTab = currentTab;
 			}
-
-			var gradeList = jsBridge.dispatchAction("YYGrade", "", "getGradeList");
-			vm.gradeList = jQuery.parseJSON(gradeList);
-        }
-
-        function speechCallback(content){
-        	vm.speechResult += content + "\n";
         }
     </script>
 </BODY>
