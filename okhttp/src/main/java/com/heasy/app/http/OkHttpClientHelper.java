@@ -35,7 +35,7 @@ public class OkHttpClientHelper {
 
         DefaultCookieJar cookieJar = new DefaultCookieJar(new MemoryCookieStore());
 
-        builder.connectTimeout(DEFAULT_CONNECT_TIMEOUT_MILLSECONDS, TimeUnit.SECONDS)
+        builder.connectTimeout(DEFAULT_CONNECT_TIMEOUT_MILLSECONDS, TimeUnit.MILLISECONDS)
         	.readTimeout(DEFAULT_READ_TIMEOUT_MILLSECONDS, TimeUnit.MILLISECONDS)
                 .cookieJar(cookieJar);
     }
