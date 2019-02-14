@@ -43,7 +43,6 @@ public class Dom4jUtil {
      * @param filename 文件名
      */
     public static Document readFromAssets(Context context, String filename) throws Exception{
-        logger.debug("Load config file from assets: " + filename);
         InputStream inputStream = FileUtil.readFromAssets(context, filename);
         SAXReader reader = new SAXReader();
         Document document = reader.read(inputStream);

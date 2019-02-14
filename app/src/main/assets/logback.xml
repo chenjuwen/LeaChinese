@@ -28,30 +28,9 @@
 		</encoder>
 	</appender>
 
-	<appender name="device" class="ch.qos.logback.core.rolling.RollingFileAppender">
-		<file>${LOG_DIR}/Device${LOG_DATE}.txt</file>
-		<append>true</append>
-		<Encoding>UTF-8</Encoding>
-		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-			<fileNamePattern>${LOG_DIR}/Device%d{yyyyMMdd}.%i.txt</fileNamePattern>
-			<maxHistory>${LOG_MAX_HISTORY}</maxHistory>
-			<timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
-				<maxFileSize>64MB</maxFileSize>
-			</timeBasedFileNamingAndTriggeringPolicy>
-		</rollingPolicy>
-		<encoder>
-			<pattern>%d{HH:mm:ss.SSS} [%thread] %-5level [%logger{50} : %line] - %msg%n</pattern>
-		</encoder>
-	</appender>
-
 	<root level="${LOG_LEVEL}">
 		<appender-ref ref="logcat" />
 		<appender-ref ref="main"/>
 	</root>
-
-	<logger name="DeviceLogger" level="${LOG_LEVEL}" additivity="false">
-		<appender-ref ref="logcat" />
-		<appender-ref ref="device"/>
-	</logger>
   	
 </configuration>

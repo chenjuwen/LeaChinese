@@ -1,8 +1,6 @@
 package com.heasy.app.core.service;
 
 import com.heasy.app.core.event.Event;
-import com.heasy.app.core.service.AbstractService;
-import com.heasy.app.core.service.EventService;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.EventBusBuilder;
