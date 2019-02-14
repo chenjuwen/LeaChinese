@@ -50,6 +50,16 @@
 			padding-left: 10px;
 		}
 
+		/* 字母 */
+		.zm td{
+			padding: 10px 3px;
+		}
+
+		.zm img{
+			width: 60px;
+			height: 60px;
+		}
+
 		.word {
 			text-align:center;
 			font-size:46px;
@@ -212,6 +222,59 @@
 					<img src="images/right.jpg" @click="nextPage()" style="margin-left:15px">
 				</div>
 			</mt-tab-container-item>
+
+			<mt-tab-container-item id="tab4" style="display:none;">
+				<table border="0" width="100%">
+					<tr>
+						<td align="center">
+							<table class="zm">
+								<tr>
+									<td><img src="letter/a.jpg"></td>
+									<td><img src="letter/b.jpg"></td>
+									<td><img src="letter/c.jpg"></td>
+									<td><img src="letter/d.jpg"></td>
+									<td><img src="letter/e.jpg"></td>
+								</tr>
+								<tr>
+									<td><img src="letter/f.jpg"></td>
+									<td><img src="letter/g.jpg"></td>
+									<td><img src="letter/h.jpg"></td>
+									<td><img src="letter/i.jpg"></td>
+									<td><img src="letter/j.jpg"></td>
+								</tr>
+								<tr>
+									<td><img src="letter/k.jpg"></td>
+									<td><img src="letter/l.jpg"></td>
+									<td><img src="letter/m.jpg"></td>
+									<td><img src="letter/n.jpg"></td>
+									<td><img src="letter/o.jpg"></td>
+								</tr>
+								<tr>
+									<td><img src="letter/p.jpg"></td>
+									<td><img src="letter/q.jpg"></td>
+									<td><img src="letter/r.jpg"></td>
+									<td><img src="letter/s.jpg"></td>
+									<td><img src="letter/t.jpg"></td>
+								</tr>
+								<tr>
+									<td><img src="letter/u.jpg"></td>
+									<td><img src="letter/v.jpg"></td>
+									<td><img src="letter/w.jpg"></td>
+									<td><img src="letter/x.jpg"></td>
+									<td><img src="letter/y.jpg"></td>
+								</tr>
+								<tr>
+									<td><img src="letter/z.jpg"></td>
+									<td>&nbsp;</td>
+									<td>&nbsp;</td>
+									<td>&nbsp;</td>
+									<td>&nbsp;</td>
+								</tr>
+							</table>
+						</td>
+					</tr>
+				</table>
+			</mt-tab-container-item>
 		</mt-tab-container>
 
 		<mt-tabbar fixed v-model="selectedTab">
@@ -223,6 +286,9 @@
 			</mt-tab-item>
 			<mt-tab-item id="tab3">
 				<img slot="icon" src="images/hanzi.png">汉字
+			</mt-tab-item>
+			<mt-tab-item id="tab4">
+				<img slot="icon" src="images/english.png">字母表
 			</mt-tab-item>
 		</mt-tabbar>
 
