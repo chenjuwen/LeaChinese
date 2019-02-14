@@ -114,3 +114,28 @@
 -keepclassmembers class * extends org.greenrobot.eventbus.util.ThrowableFailureEvent {
     <init>(java.lang.Throwable);
 }
+
+#保证第三方依赖包不混淆
+-dontwarn org.**
+-keep class org.** { *; }
+
+-dontwarn net.**
+-keep class net.** { *; }
+
+-dontwarn de.**
+-keep class de.** { *; }
+
+-dontwarn ch.**
+-keep class ch.** { *; }
+
+-dontwarn java.**
+-keep class java.** { *; }
+
+-dontwarn javax.**
+-keep class javax.** { *; }
+
+-dontwarn com.googlecode.**
+-keep class com.googlecode.** { *; }
+
+-dontwarn com.alibaba.**
+-keep class com.alibaba.** { *; }
