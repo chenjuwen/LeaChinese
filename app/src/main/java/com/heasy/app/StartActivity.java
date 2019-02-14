@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
+import android.util.DisplayMetrics;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.TextView;
@@ -27,6 +28,14 @@ public class StartActivity extends AppCompatActivity {
 
         logger.debug("versionCode: " + VersionUtil.getVersionCode(getApplicationContext()));
         logger.debug("versionName: " + VersionUtil.getVersionName(getApplicationContext()));
+
+        //获取屏幕的宽高
+        WindowManager windowManager = getWindowManager();
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        windowManager.getDefaultDisplay().getMetrics(displayMetrics);
+        int width = displayMetrics.widthPixels;
+        int height = displayMetrics.heightPixels;
+        logger.debug("width=" + width + ", height=" + height);
 
         //隐藏状态栏
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
