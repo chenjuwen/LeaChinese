@@ -3,6 +3,7 @@
 <HEAD>
 	<TITLE>学汉字</TITLE>
 	<link rel="stylesheet" type="text/css" href="css/mint.min.css" />
+	<link rel="stylesheet" type="text/css" href="css/muse-ui.css" />
 	<link rel="stylesheet" type="text/css" href="css/common.css" />
 
 	<script src="js/jquery.min-1.11.3.js"></script>
@@ -11,6 +12,7 @@
 	<script src="js/JSBridgeExt.js"></script>
 	<script src="js/vue.min.js"></script>
 	<script src="js/mint.min.js"></script>
+	<script src="js/muse-ui.js"></script>
 
 	<style type="text/css">
 		/* 声母 */
@@ -41,9 +43,11 @@
 			height: 60px;
 		}
 
+		/* 详情对话框 */
 		.word-container {
 			width: 100%;
-			padding-top: 10px;
+			padding-top: 5px;
+			padding-left: 10px;
 		}
 
 		.word {
@@ -57,11 +61,34 @@
 			display: block;
 			position: relative;
 			float: left;
-			padding-top: 2px;
 			margin-left: 4px;
 			margin-right: 3px;
 			margin-bottom: 10px;
 			cursor: pointer;
+		}
+
+		/* 详情对话框 - cell */
+		.word-info-detail td {
+			font-size: 16px;
+			padding: 5px 0;
+		}
+
+		.word-info-detail span {
+			font-weight: 600;
+			font-size: 16px;
+		}
+
+		/* 详情对话框 - header */
+		.mu-appbar {
+			height: 50px;
+		}
+
+		.mint-radiolist-label {
+			padding: 0 0;
+		}
+
+		.mint-cell-wrapper, .mint-cell:last-child {
+			background-image: none;
 		}
 	</style>
 </HEAD>
@@ -165,8 +192,24 @@
 			</mt-tab-container-item>
 
 			<mt-tab-container-item id="tab3" style="display:none;">
+				<div>
+					<mt-cell title="排序:">
+						<mt-radio title="" v-model="orderBy" :options="['笔画数']"> </mt-radio>
+						<mt-radio title="" v-model="orderBy" :options="['拼音']"> </mt-radio>
+						<mt-radio title="" v-model="orderBy" :options="['汉字']"> </mt-radio>
+					</mt-cell>
+
+					<mt-cell title="查询:">
+						<mt-field label="" v-model.trim="keyword"></mt-field>
+						<mt-button type="primary" size="small" @click="_query">查询</mt-button>
+					</mt-cell>
+				</div>
 				<div class="word-container">
 					<span class="word" v-for="(item,index) in wordInfoList" @click="showWordDetail(index)">{{ item.word }}</span>
+				</div>
+				<div style="clear:both; text-align:center; padding-top:10px;" v-show="pages != 0">
+					<img src="images/left.jpg" @click="provPage()" style="margin-right:15px">
+					<img src="images/right.jpg" @click="nextPage()" style="margin-left:15px">
 				</div>
 			</mt-tab-container-item>
 		</mt-tab-container>
@@ -182,6 +225,36 @@
 				<img slot="icon" src="images/hanzi.png">汉字
 			</mt-tab-item>
 		</mt-tabbar>
+
+
+		<mu-dialog width="360" transition="slide-bottom" fullscreen :open.sync="openFullscreen">
+			<mu-appbar color="primary" :title="'详情 - ' + selectedWordInfo.word">
+				<mu-button slot="right" flat  @click="closeFullscreenDialog">关闭</mu-button>
+			</mu-appbar>
+
+			<table width="100%">
+				<tr>
+					<td align="center">
+						<table width="300" class="word-info-detail" border="0">
+							<tr>
+								<td colspan="2" align="center"><img :src="'words/'+selectedWordInfo.image_name"></td>
+							</tr>
+							<tr>
+								<td><span>拼音：</span>{{ selectedWordInfo.pinyin }}</td>
+								<td><span>笔画数：</span>{{ selectedWordInfo.count }}</td>
+							</tr>
+							<tr>
+								<td><span>部首：</span>{{ selectedWordInfo.bushou }}</td>
+								<td><span>结构：</span>{{ selectedWordInfo.jiegou }}</td>
+							</tr>
+							<tr>
+								<td colspan="2"><span>词组：</span>{{ selectedWordInfo.cizu }}</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+			</table>
+		</mu-dialog>
 	</div>
 
 	<script>
@@ -190,8 +263,15 @@
 			data: {
 				selectedTab: "tab1",
 				wordInfoList: [
-					{"word":"月"},{"word":"月"},{"word":"月"},{"word":"月"},{"word":"月"},{"word":"月"},{"word":"月"}
-				]
+					//{"word":"月"},{"word":"月"},{"word":"月"},{"word":"月"},{"word":"月"},{"word":"月"},{"word":"月"}
+				],
+				//selectedWordInfo: {"cizu":"山东省, 山西省, 山猫, 矿山, 山寨","image_name":"山.gif","word":"山","jiegou":"独体结构","id":"4","bushou":"山","count":"3","pinyin":"shān"},
+				selectedWordInfo: {},
+				openFullscreen: false,
+				orderBy: "笔画数",
+				keyword: "",
+				pageNum: 1,
+				pages: 0
 			},
 			methods: {
 				_playVoice: function(name){
@@ -199,7 +279,27 @@
 					jsBridge.dispatchAction(actionNames.AudioPlay, JSON.stringify(obj));
 				},
 				showWordDetail: function(index){
-
+					this.selectedWordInfo = this.wordInfoList[index];
+					this.openFullscreen = true;
+				},
+				closeFullscreenDialog: function(){
+					this.openFullscreen = false;
+				},
+				_query: function(){
+					this.pageNum = 1;
+					queryData();
+				},
+				provPage: function(){
+					if(this.pageNum > 1){
+						this.pageNum = this.pageNum - 1;
+						queryData();
+					}
+				},
+				nextPage: function(){
+					if(this.pageNum < this.pages){
+						this.pageNum = this.pageNum + 1;
+						queryData();
+					}
 				}
 			},
 			watch: {
@@ -207,6 +307,10 @@
 				selectedTab: function(val){
 					var obj = {"key":"currentTab", "value":val};
 					jsBridge.dispatchAction(actionNames.GlobalCache, JSON.stringify(obj), "set");
+				},
+				orderBy: function(val){
+					this.pageNum = 1;
+					queryData();
 				}
 			}
 		})
@@ -221,9 +325,17 @@
 				vm.selectedTab = currentTab;
 			}
 
-			var obj = {"keyword":"", "orderBy":"id", "pageSize":25, "pageNum":1};
+			if(vm.selectedTab == "tab3"){
+				queryData();
+			}
+        }
+
+        function queryData(){
+        	var obj = {"keyword":vm.keyword, "orderBy":vm.orderBy, "pageSize":25, "pageNum":vm.pageNum};
 			var dataResult = jsBridge.dispatchAction("Word", JSON.stringify(obj), "query");
-			vm.wordInfoList = jQuery.parseJSON(dataResult).list;
+			var jsonData = jQuery.parseJSON(dataResult);
+			vm.wordInfoList = jsonData.list;
+			vm.pages = jsonData.pages;
         }
     </script>
 </BODY>
