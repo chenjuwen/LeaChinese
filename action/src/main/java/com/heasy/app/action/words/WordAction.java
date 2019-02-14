@@ -14,16 +14,17 @@ import org.slf4j.LoggerFactory;
 /**
  * 拼音
  */
-@JSActionAnnotation(name = ActionNames.Pinyin)
-public class PinyinAction implements Action {
-    private static final Logger logger = LoggerFactory.getLogger(PinyinAction.class);
+@JSActionAnnotation(name = ActionNames.Word)
+public class WordAction implements Action {
+    private static final Logger logger = LoggerFactory.getLogger(WordAction.class);
 
     @Override
     public String execute(HeasyContext heasyContext, String jsonData, String extend) {
         JSONObject jsonObject = FastjsonUtil.string2JSONObject(jsonData);
-        String name = FastjsonUtil.getString(jsonObject, "name");
-        String mp3FilePath = heasyContext.getServiceEngine().getConfigurationService().getConfigBean().getDBFilePath();
-        MP3Play.play(mp3FilePath);
+        String keyword = FastjsonUtil.getString(jsonObject, "keyword");
+
+        StringBuilder sb = new StringBuilder();
+
         return SUCCESS;
     }
 

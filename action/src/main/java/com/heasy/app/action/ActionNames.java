@@ -14,6 +14,6 @@ public final class ActionNames {
     public static final String AudioPlay = "AudioPlay";
     public static final String GoBack = "GoBack";
 
-    public static final String Pinyin = "Pinyin";
+    public static final String Word = "Word";
 
 }

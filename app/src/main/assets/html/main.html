@@ -13,6 +13,7 @@
 	<script src="js/mint.min.js"></script>
 
 	<style type="text/css">
+		/* 声母 */
 		.sm{
 			border-collapse: collapse;
 		}
@@ -26,6 +27,7 @@
 			height: 60px;
 		}
 
+		/* 韵母 */
 		.ym{
 			border-collapse: collapse;
 		}
@@ -37,6 +39,28 @@
 		.ym img{
 			width: 60px;
 			height: 60px;
+		}
+
+		.word-container {
+			width: 100%;
+			padding-top: 15px;
+		}
+
+		.word {
+			text-align:center;
+			font-size:50px;
+			font-weight:600;
+			width:60px;
+			height:60px;
+			background-image:url(images/mzg.jpg);
+			background-repeat:no-repeat;
+			display: block;
+			position: relative;
+			float: left;
+			margin-left: 10px;
+			margin-right: 5px;
+			margin-bottom: 20px;
+			cursor: pointer;
 		}
 	</style>
 </HEAD>
@@ -140,7 +164,9 @@
 			</mt-tab-container-item>
 
 			<mt-tab-container-item id="tab3" style="display:none;">
-
+				<div class="word-container">
+					<span class="word" v-for="(item,index) in wordInfoList" @click="showWordDetail(index)">{{ item.word }}</span>
+				</div>
 			</mt-tab-container-item>
 		</mt-tab-container>
 
@@ -161,25 +187,23 @@
 		var vm = new Vue({
 			el: '#app',
 			data: {
-				selectedTab: "tab1"
+				selectedTab: "tab1",
+				wordInfoList: [
+					{word:"月"},
+					{word:"山"},
+					{word:"山"},
+					{word:"山"},
+					{word:"山"},
+					{word:"山"}
+				]
 			},
 			methods: {
-				changePage: function(pageURL, actionName, extend){
-					var obj = {"url":pageURL};
-
-					if(actionName != null && actionName != ""){
-						jsBridge.dispatchAction(actionName, JSON.stringify(obj), extend);
-					}else{
-						jsBridge.dispatchAction(actionNames.PageTransfer, JSON.stringify(obj), extend);
-					}
-				},
-				showUnit: function(gradeId){
-					var obj = {"parameters": "gradeId="+gradeId, "url": "yy_unit_list.html"};
-					jsBridge.dispatchAction(actionNames.PageTransfer, JSON.stringify(obj));
-				},
 				_playVoice: function(name){
 					var obj = {"audioFile": "html/pinyin/" + name + ".mp3"};
 					jsBridge.dispatchAction(actionNames.AudioPlay, JSON.stringify(obj));
+				},
+				showWordDetail: function(index){
+
 				}
 			},
 			watch: {
