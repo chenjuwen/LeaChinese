@@ -15,7 +15,7 @@
             android:layout_height="0dp"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="学汉字"
+            android:text="学习工具"
             android:textColor="#33b5e5"
             android:textSize="50sp"
             android:layout_marginBottom="100dp"

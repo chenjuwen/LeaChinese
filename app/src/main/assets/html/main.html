@@ -120,7 +120,7 @@
 </HEAD>
 <BODY bgcolor="#B4CDCD">
 	<div id="app" class="vue-mint-container">
-		<mt-header fixed title="学汉字"></mt-header>
+		<mt-header fixed title="学习工具"></mt-header>
 
 		<mt-tab-container v-model="selectedTab">
 			<mt-tab-container-item id="tab1">
@@ -541,6 +541,23 @@
 					</tr>
 				</table>
 			</mt-tab-container-item>
+
+			<mt-tab-container-item id="tab7" style="display:none; overflow:auto; padding:8px 5px 2px 2px;">
+				<table border="0" width="100%">
+					<tr>
+						<td align="center" height="120">
+							<mt-button type="primary" size="normal" @click="_randomPlus" style="font-size:16px; height:50px;">下一道加法算式</mt-button>&nbsp;
+							<mt-button type="primary" size="normal" @click="_randomMinus" style="font-size:16px; height:50px;">下一道减法算式</mt-button>
+						</td>
+					</tr>
+					<tr>
+						<td align="center" style="padding-top:60px; font-size:90px; font-weight:600; color:#36648B; ">
+							{{ randomFormulaStr }}
+						</td>
+					</tr>
+				</table>
+			</mt-tab-container-item>
+
 		</mt-tab-container>
 
 		<mt-tabbar fixed v-model="selectedTab">
@@ -557,10 +574,13 @@
 				<img slot="icon" src="images/english.png">字母表
 			</mt-tab-item>
 			<mt-tab-item id="tab5">
-				<img slot="icon" src="images/shuxue.png">加法表
+				<img slot="icon" src="images/shuxue.png">加法口诀表
 			</mt-tab-item>
 			<mt-tab-item id="tab6">
-				<img slot="icon" src="images/shuxue.png">减法表
+				<img slot="icon" src="images/shuxue.png">减法口诀表
+			</mt-tab-item>
+			<mt-tab-item id="tab7">
+				<img slot="icon" src="images/shuxue.png">加减法练习
 			</mt-tab-item>
 		</mt-tabbar>
 
@@ -609,7 +629,8 @@
 				orderBy: "笔画数",
 				keyword: "",
 				pageNum: 1,
-				pages: 0
+				pages: 0,
+				randomFormulaStr: ""
 			},
 			methods: {
 				_playVoice: function(name){
@@ -637,6 +658,20 @@
 					if(this.pageNum < this.pages){
 						this.pageNum = this.pageNum + 1;
 						queryData();
+					}
+				},
+				_randomPlus: function(){
+					var n1 = Math.floor(Math.random()*10);
+					var n2 = Math.floor(Math.random()*10);
+					this.randomFormulaStr = n1 + "+" + n2 + "=?";
+				},
+				_randomMinus: function(){
+					var n1 = Math.floor(Math.random()*10);
+					var n2 = Math.floor(Math.random()*10);
+					if(n2 > n1){
+						this.randomFormulaStr = n2 + "-" + n1 + "=?";
+					}else{
+						this.randomFormulaStr = n1 + "-" + n2 + "=?";
 					}
 				}
 			},
