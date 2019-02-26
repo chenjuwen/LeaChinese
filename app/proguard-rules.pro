@@ -139,3 +139,6 @@
 
 -dontwarn com.alibaba.**
 -keep class com.alibaba.** { *; }
+
+-dontwarn com.heasy.**
+-keep class com.heasy.** { *; }
