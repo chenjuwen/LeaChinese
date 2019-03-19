@@ -93,6 +93,10 @@
 			cursor: pointer;
 		}
 
+		.mint-cell{
+			min-height: 30px;
+		}
+
 		/* 详情对话框 - cell */
 		.word-info-detail td {
 			font-size: 16px;
@@ -238,7 +242,7 @@
 				<div class="word-container">
 					<span class="word" v-for="(item,index) in wordInfoList" @click="showWordDetail(index)">{{ item.word }}</span>
 				</div>
-				<div style="clear:both; text-align:center; padding-top:10px;" v-show="pages != 0">
+				<div style="clear:both; text-align:center; padding-top:5px;" v-show="pages != 0">
 					<img src="images/left.jpg" @click="provPage()" style="margin-right:15px">
 					<img src="images/right.jpg" @click="nextPage()" style="margin-left:15px">
 				</div>
@@ -709,7 +713,7 @@
         }
 
         function queryData(){
-        	var obj = {"keyword":vm.keyword, "orderBy":vm.orderBy, "pageSize":25, "pageNum":vm.pageNum};
+        	var obj = {"keyword":vm.keyword, "orderBy":vm.orderBy, "pageSize":30, "pageNum":vm.pageNum};
 			var dataResult = jsBridge.dispatchAction("Word", JSON.stringify(obj), "query");
 			var jsonData = jQuery.parseJSON(dataResult);
 			vm.wordInfoList = jsonData.list;
