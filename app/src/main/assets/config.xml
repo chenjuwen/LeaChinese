@@ -13,10 +13,10 @@
 	<countDownTimeoutPage>timeout.html</countDownTimeoutPage>
 
 	<!-- Action类所在的根包路径，多个路径用分号(;)分隔 -->
-	<actionBasePackage>com.heasy.app.action</actionBasePackage>
+	<actionBasePackage>com.heasy.leachinese.action</actionBasePackage>
 
 	<!-- Service类所在的根包路径，多个路径用分号(;)分隔 -->
-	<serviceBasePackage>com.heasy.app</serviceBasePackage>
+	<serviceBasePackage>com.heasy.leachinese</serviceBasePackage>
 
 	<!-- webview加载html页面的根路径 -->
 	<webviewLoadBasePath>file:///android_asset/html/</webviewLoadBasePath>
